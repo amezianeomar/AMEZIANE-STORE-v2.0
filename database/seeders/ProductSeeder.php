@@ -3,65 +3,44 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Product; // Important : importer le modèle
+use App\Models\Product;
 
 class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        // Données des Consoles
-        $consoles = [
-            [
-                'nom' => 'PS5 Slim',
-                'prix' => 549,
-                'image' => 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80',
-                'desc' => 'La nouvelle PS5, plus fine, même puissance.',
-                'categorie' => 'consoles'
-            ],
-            [
-                'nom' => 'Xbox Series X',
-                'prix' => 499,
-                'image' => 'https://gamingstore.ma/253-medium_default/console-xbox-series-x.jpg',
-                'desc' => 'La console la plus puissante de Microsoft.',
-                'categorie' => 'consoles'
-            ],
-            [
-                'nom' => 'Nintendo Switch OLED',
-                'prix' => 319,
-                'image' => 'https://www.materielmaroc.com/wp-content/uploads/2024/11/nintendo-switech-oled.jpg',
-                'desc' => 'Écran OLED vibrant pour jouer partout.',
-                'categorie' => 'consoles'
-            ]
-        ];
+        Product::truncate();
 
-        // Données des Périphériques
-        $peripheriques = [
-            [
-                'nom' => 'Clavier Mécanique RGB',
-                'prix' => 129,
-                'image' => 'https://maxgaming.ma/wp-content/uploads/2025/02/maxgaming-maroc-rabat-sale-SPIRIT-OF-GAMER-PROK1-Semi-Mechanical-RGB-Gaming-Keyboard-1.webp',
-                'desc' => 'Switches mécaniques et éclairage infini.',
-                'categorie' => 'peripheriques'
-            ],
-            [
-                'nom' => 'Souris Logitech G Pro',
-                'prix' => 99,
-                'image' => 'https://techspace.ma/cdn/shop/files/LogitechGProXSuperlight2Lightspeed_Black.png?v=1739275713',
-                'desc' => 'Précision chirurgicale sans fil.',
-                'categorie' => 'peripheriques'
-            ],
-            [
-                'nom' => 'Casque HyperX Cloud',
-                'prix' => 79,
-                'image' => 'https://duga.ma/wp-content/uploads/2024/12/94377153_8344054165.jpg',
-                'desc' => 'Confort ultime pour longues sessions.',
-                'categorie' => 'peripheriques'
-            ]
-        ];
+        // READ DATA FROM JSON FILE
+        $json = file_get_contents(base_path('products-pictures.json'));
+        $data = json_decode($json, true);
 
-        // Insertion dans la BDD
-        foreach (array_merge($consoles, $peripheriques) as $item) {
-            Product::create($item);
+        if (!$data) {
+            $this->command->error("Erreur de lecture du fichier products-pictures.json !");
+            return;
         }
+
+        foreach ($data as $cat => $products) {
+            foreach ($products as $product) {
+                Product::create([
+                    'nom' => $product['name'],
+                    'prix' => rand(300, 15000),
+                    'image' => $product['img'],
+                    'desc' => "Découvrez le {$product['name']}. Une expérience de jeu immersive avec des performances de pointe pour les passionnés.",
+                    'categorie' => $cat
+                ]);
+            }
+        }
+    }
+
+    private function getImageForCategory($cat, $i)
+    {
+        // "Genius Way" : Utiliser un service de placeholder qui génère une image AVEC LE TEXTE du produit.
+        // Cela permet d'avoir "visuellement" le bon produit sans chercher 72 images manuellement.
+        // On récupère le nom du produit depuis la liste $data si possible, ou on génère un générique.
+        
+        // Pour faire simple ici, on va devoir tricher un peu car cette méthode n'a que l'index $i.
+        // Mais attendez, on peut passer le NOM en paramètre au lieu de $i !
+        return "https://placehold.co/600x400/1a0b2e/00ff00?text=" . urlencode("Produit $i");
     }
 }

@@ -15,6 +15,14 @@ class HomeController extends Controller
     }
 
     /**
+     * Affiche la page des catégories
+     */
+    public function categories()
+    {
+        return view('Categories');
+    }
+
+    /**
      * Affiche la page À propos
      */
     public function about()

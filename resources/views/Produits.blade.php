@@ -44,6 +44,13 @@
             </div>
         @endforeach
     </div>
+    
+    <!-- Pagination -->
+    <div class="mt-8 flex justify-center">
+        <div class="bg-brand-surface px-4 py-2 rounded-lg border border-white/5">
+             {{ $liste->links() }}
+        </div>
+    </div>
 @else
     <div class="text-center py-20 px-4">
         <h3 class="text-xl md:text-2xl text-gray-400">Aucun produit trouvé dans cette catégorie.</h3>

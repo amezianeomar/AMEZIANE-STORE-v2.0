@@ -11,5 +11,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/produits/{cat}', [ProductController::class, 'getProductsByCategorie'])->name('produits.categorie');
 
 // Routes Statiques
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/categories', [HomeController::class, 'categories'])->name('categories');
 Route::get('/a-propos', [HomeController::class, 'about'])->name('a_propos');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');

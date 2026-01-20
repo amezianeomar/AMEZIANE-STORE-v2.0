@@ -15,12 +15,29 @@
                     Accueil
                 </a>
                 
-                <a href="{{ route('produits.categorie', 'consoles') }}" class="font-display text-sm font-medium text-gray-300 hover:text-brand-neon transition-colors uppercase tracking-widest hover:border-b-2 hover:border-brand-neon py-2 {{ request()->is('produits/consoles') ? 'text-brand-neon border-b-2 border-brand-neon' : '' }}">
-                    Consoles
-                </a>
-                <a href="{{ route('produits.categorie', 'peripheriques') }}" class="font-display text-sm font-medium text-gray-300 hover:text-brand-neon transition-colors uppercase tracking-widest hover:border-b-2 hover:border-brand-neon py-2 {{ request()->is('produits/peripheriques') ? 'text-brand-neon border-b-2 border-brand-neon' : '' }}">
-                    Périphériques
-                </a>
+                <!-- Dropdown Catégories -->
+                <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                    <a href="{{ route('categories') }}" class="flex items-center font-display text-sm font-medium text-gray-300 hover:text-brand-neon transition-colors uppercase tracking-widest hover:border-b-2 hover:border-brand-neon py-2 focus:outline-none h-full">
+                        Catégories
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 translate-y-2"
+                         class="absolute left-0 mt-0 w-56 bg-brand-surface border border-white/10 rounded-xl shadow-2xl py-2 z-50 backdrop-blur-xl"
+                         x-cloak>
+                        @foreach(['consoles', 'monitors', 'son', 'claviers', 'chaises', 'souris', 'video-games', 'cartes-graphiques'] as $cat)
+                            <a href="{{ route('produits.categorie', $cat) }}" class="block px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-brand-neon transition-colors capitalize">
+                                {{ ucfirst(str_replace('-', ' ', $cat)) }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
 
                 <a href="{{ route('a_propos') }}" class="font-display text-sm font-medium text-gray-300 hover:text-brand-neon transition-colors uppercase tracking-widest hover:border-b-2 hover:border-brand-neon py-2 {{ request()->routeIs('a_propos') ? 'text-brand-neon border-b-2 border-brand-neon' : '' }}">
                     À Propos
@@ -50,8 +67,25 @@
          x-cloak>
          
          <a href="{{ route('home') }}" class="block text-center font-display text-2xl font-bold py-4 border-b border-white/10 hover:text-brand-neon {{ request()->routeIs('home') ? 'text-brand-neon' : 'text-white' }}">Accueil</a>
-         <a href="{{ route('produits.categorie', 'consoles') }}" class="block text-center font-display text-2xl font-bold py-4 border-b border-white/10 hover:text-brand-neon {{ request()->is('produits/consoles') ? 'text-brand-neon' : 'text-white' }}">Consoles</a>
-         <a href="{{ route('produits.categorie', 'peripheriques') }}" class="block text-center font-display text-2xl font-bold py-4 border-b border-white/10 hover:text-brand-neon {{ request()->is('produits/peripheriques') ? 'text-brand-neon' : 'text-white' }}">Périphériques</a>
+         
+         <!-- Mobile Cats Split -->
+         <div x-data="{ catOpen: false }" class="border-b border-white/10">
+            <div class="flex items-center">
+                <a href="{{ route('categories') }}" class="flex-grow text-center font-display text-2xl font-bold py-4 text-white hover:text-brand-neon transition-colors">
+                    Catégories
+                </a>
+                <button @click="catOpen = !catOpen" class="p-4 text-white hover:text-brand-neon focus:outline-none border-l border-white/10">
+                    <svg :class="{'rotate-180': catOpen}" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+            <div x-show="catOpen" x-collapse class="bg-black/20">
+                @foreach(['consoles', 'monitors', 'son', 'claviers', 'chaises', 'souris', 'video-games', 'cartes-graphiques'] as $cat)
+                    <a href="{{ route('produits.categorie', $cat) }}" class="block text-center py-3 text-lg text-gray-400 hover:text-brand-neon hover:bg-white/5 transition-colors capitalize">
+                        {{ ucfirst(str_replace('-', ' ', $cat)) }}
+                    </a>
+                @endforeach
+            </div>
+         </div>
          
          <a href="{{ route('a_propos') }}" class="block text-center font-display text-2xl font-bold py-4 border-b border-white/10 hover:text-brand-neon {{ request()->routeIs('a_propos') ? 'text-brand-neon' : 'text-white' }}">À Propos</a>
          <a href="{{ route('contact') }}" class="block text-center font-display text-2xl font-bold py-4 border-b border-white/10 hover:text-brand-neon {{ request()->routeIs('contact') ? 'text-brand-neon' : 'text-white' }}">Contact</a>

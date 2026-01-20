@@ -19,13 +19,13 @@
             Découvrez notre sélection ultime de consoles et périphériques pour dominer la compétition.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 px-4 sm:px-0">
-            <a href="{{ route('produits.categorie', 'consoles') }}" 
+            <a href="{{ route('categories') }}" 
                class="w-full sm:w-auto px-8 py-4 bg-brand-violet hover:bg-brand-magenta text-white font-display font-bold uppercase tracking-widest rounded transition-all transform hover:scale-105 neon-border text-center">
-                Voir les Consoles
+                Nos Catégories
             </a>
-            <a href="{{ route('produits.categorie', 'peripheriques') }}" 
+            <a href="{{ route('contact') }}" 
                class="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-brand-neon text-brand-neon hover:bg-brand-neon hover:text-[#1a0b2e] font-display font-bold uppercase tracking-widest rounded transition-all transform hover:scale-105 text-center">
-                Périphériques
+                Contact
             </a>
         </div>
     </div>

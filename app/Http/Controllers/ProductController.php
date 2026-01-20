@@ -15,15 +15,14 @@ class ProductController extends Controller
      */
     public function getProductsByCategorie($cat)
     {
-        // Requete SQL dynamique
-        $products = Product::where('categorie', $cat)->get();
+        // Pagination : 6 produits par page
+        $products = Product::where('categorie', $cat)->paginate(6);
 
         if ($products->isEmpty()) {
             abort(404);
         }
 
-        // On passe 'liste' et 'titre' pour respecter les variables utilisées dans Produits.blade.php
-        // tout en respectant l'instruction de passer les données.
+        // On passe 'liste' et 'titre'
         return view('Produits', [
             'titre' => ucfirst($cat),
             'liste' => $products
