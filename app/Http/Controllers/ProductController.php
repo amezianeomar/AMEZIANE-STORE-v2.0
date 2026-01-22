@@ -74,7 +74,11 @@ class ProductController extends Controller
             'image' => $imageUrl
         ]);
 
-        // 5. Redirection
-        return redirect()->route('produits.create')->with('success', 'Produit ajouté avec succès !');
+        // 5. Redirection avec les détails pour le Modal "Godly"
+        return redirect()->route('produits.create')->with([
+            'success' => 'Produit ajouté avec succès !',
+            'product_name' => $request->input('nom'),
+            'product_image' => $imageUrl
+        ]);
     }
 }

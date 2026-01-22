@@ -12,22 +12,53 @@
             <p class="mt-2 text-center text-xs sm:text-sm text-gray-400">Remplissez les détails pour enrichir le catalogue.</p>
         </div>
 
-        <!-- Success Message -->
+        <!-- GODLY SUCCESS MODAL -->
         @if(session('success'))
-            <div class="bg-green-500/10 border-l-4 border-green-500 p-4 m-6 mb-0">
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
+        <div x-data="{ show: true }" x-show="show" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in">
+            <div class="bg-brand-dark/95 border-2 border-brand-neon p-1 rounded-2xl shadow-[0_0_50px_rgba(0,255,0,0.5)] transform scale-100 animate-bounce-slow max-w-lg w-full mx-4">
+                <div class="bg-gradient-to-b from-gray-900 to-black rounded-xl p-8 text-center relative overflow-hidden">
+                    
+                    <!-- Background Glow -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-brand-neon/20 blur-3xl rounded-full pointer-events-none"></div>
+
+                    <!-- Icon / Image -->
+                    <div class="relative z-10 mb-6 group">
+                        <div class="mx-auto w-32 h-32 rounded-full border-4 border-brand-neon shadow-[0_0_20px_rgba(57,255,20,0.5)] overflow-hidden bg-black flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                            @if(session('product_image'))
+                                <img src="{{ session('product_image') }}" alt="Product" class="w-full h-full object-cover">
+                            @else
+                                <svg class="w-16 h-16 text-brand-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            @endif
+                        </div>
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-brand-neon text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                            Legendary Item
+                        </div>
                     </div>
-                    <div class="ml-3">
-                        <p class="text-sm text-green-400 font-medium">
-                            {{ session('success') }}
-                        </p>
+
+                    <!-- Title -->
+                    <h3 class="text-3xl font-display font-bold text-white mb-2 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                        MISSION ACCOMPLIE !
+                    </h3>
+                    <p class="text-brand-neon font-mono text-sm uppercase tracking-[0.2em] mb-6">
+                        Produit Ajouté au Catalogue
+                    </p>
+
+                    <!-- Product Name -->
+                    @if(session('product_name'))
+                    <div class="bg-white/5 border border-white/10 rounded-lg p-4 mb-6">
+                        <p class="text-gray-400 text-xs uppercase tracking-wider mb-1">Nouveau Loot</p>
+                        <p class="text-xl text-white font-bold">{{ session('product_name') }}</p>
                     </div>
+                    @endif
+
+                    <!-- Action Button -->
+                    <button @click="show = false" class="w-full py-3 bg-brand-neon hover:bg-white text-black font-bold uppercase tracking-widest rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(57,255,20,0.4)] hover:shadow-[0_0_25px_rgba(255,255,255,0.6)]">
+                        CONTINUER
+                    </button>
+                    
                 </div>
             </div>
+        </div>
         @endif
 
         <!-- Form -->
