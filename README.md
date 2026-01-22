@@ -1,11 +1,11 @@
-# 🚀 AMEZIANE-STORE V3.1 (MVC + Pagination + Data) - Ateliers 6 & 7
+# 🚀 AMEZIANE-STORE V3.2 (MVC + Pagination + Cloudinary) - Ateliers 6, 7 & 8
 
 Ce fichier `README.md` documente la version complète **V3.1** du projet E-commerce.
 Cette version intègre une architecture MVC, une pagination robuste, un catalogue étendu avec données réelles, et une navigation dynamique.
 
 ---
 
-## 📋 Nouveautés (Ateliers 6 & 7)
+## 📋 Nouveautés (Ateliers 6, 7 & 8)
 
 ### Atelier 6 : Architecture MVC
 
@@ -23,6 +23,13 @@ Cette version intègre une architecture MVC, une pagination robuste, un catalogu
 - **Pages Catégories** : Vue dédiée `/categories` présentant les 8 familles de produits.
 - **Données Externes** : Utilisation de `products-pictures.json` pour la gestion facile des images.
 - **Design** : Intégration complète du thème "Dark Gaming" (Neon/Violet).
+
+### Atelier 8 : Administration & Cloudinary (Mode GOD)
+
+- **Upload Cloudinary** : Intégration du SDK Cloudinary pour l'hébergement d'images serverless.
+- **Preview Temps Réel** : Prévisualisation JS instantanée de l'image sélectionnée.
+- **GOD PORTAL** : Accès rapide à l'interface d'administration depuis le menu.
+- **Godly Success Modal** : Animation de succès "Legendary Loot" lors de la création d'un produit.
 
 ---
 
