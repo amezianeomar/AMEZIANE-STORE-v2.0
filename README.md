@@ -1,104 +1,81 @@
-# 🚀 AMEZIANE-STORE V3.0 (Architecture MVC) - Atelier 6
+# 🚀 AMEZIANE-STORE V3.1 (MVC + Pagination + Data) - Ateliers 6, 7, 8
 
-Ce fichier `README.md` documente la version **V3.0** du projet E-commerce (Atelier 6).
-Cette version introduit une **Architecture MVC complète** (Model-View-Controller) pour structurer le code de manière professionnelle.
-
----
-
-## 📋 Nouveautés V3.0 (Atelier 6)
-
-L'objectif principal était de séparer la logique de traitement des routes :
-
-- **Controllers** : Introduction de `ProductController` et `HomeController`.
-- **Refactoring** : Remplacement des closures anonymes par des appels de méthodes de contrôleur.
-- **MVC** : Architecture respectée (Model `Product` ↔ Controller `ProductController` ↔ View `Produits`).
-
-### 🛠 Stack Technique V3
-
-- **Backend** : Laravel 10/11 (Architecture MVC).
-- **Database** : MySQL (Production: AlwaysData / Local: Laragon/Wamp).
-- **Frontend** : Tailwind CSS + Alpine.js.
-- **Hébergement** : Vercel.
+Ce fichier `README.md` documente la version complète **V3.1** du projet E-commerce.
+Cette version intègre une architecture MVC, une pagination robuste, un catalogue étendu avec données réelles, et une navigation dynamique.
 
 ---
 
-## 📂 Code Source (Architecture MVC)
+## 📋 Nouveautés (Ateliers 6, 7, 8)
 
-Voici les fichiers clés introduits pour la gestion MVC.
+### Atelier 6 : Architecture MVC
 
-### 1️⃣ Le Controller Principal (`app/Http/Controllers/ProductController.php`)
+- **Controllers** : Séparation logique via `ProductController` et `HomeController`.
+- **Refactoring** : Routes propres pointant vers les méthodes de contrôleur.
 
-Gère la logique métier pour les produits.
+### Atelier 7 : Pagination et Catalogue Étendu
 
-```php
-<?php
-namespace App\Http\Controllers;
-use App\Models\Product;
-use Illuminate\Http\Request;
+- **Catalogue** : Expansion à **72 produits** (9 produits x 8 catégories).
+- **Pagination** : Implémentation de `paginate(6)` pour une navigation fluide.
+- **Menu Dynamique** : Dropdown "Catégories" compatible Desktop/Mobile (Alpine.js).
 
-class ProductController extends Controller
-{
-    public function getProductsByCategorie($cat)
-    {
-        $products = Product::where('categorie', $cat)->get();
+### Atelier 8 : Données Réelles et Landing Page
 
-        if ($products->isEmpty()) { abort(404); }
+- **Pages Catégories** : Vue dédiée `/categories` présentant les 8 familles de produits.
+- **Données Externes** : Utilisation de `products-pictures.json` pour la gestion facile des images.
+- **Design** : Intégration complète du thème "Dark Gaming" (Neon/Violet).
 
-        return view('Produits', [
-            'titre' => ucfirst($cat),
-            'liste' => $products
-        ]);
-    }
-}
-```
+---
 
-### 2️⃣ Routes MVC (`routes/web.php`)
+## 📂 Structure du Code
 
-Les routes délèguent désormais le traitement aux contrôleurs.
+### 1️⃣ Gestion des Données (`database/seeders`)
 
-```php
-<?php
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
+L'importation des produits se fait désormais via un fichier JSON externe pour faciliter la maintenance des images.
 
-// Routes dynamiques via Controller
-Route::get('/produits/{cat}', [ProductController::class, 'getProductsByCategorie'])->name('produits.categorie');
-
-// Routes statiques via HomeController
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/a-propos', [HomeController::class, 'about'])->name('a_propos');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-```
-
-### 3️⃣ Le Modèle (`app/Models/Product.php`)
-
-Demeure inchangé, reponsable de l'interaction avec la base de données.
-
-```php
-<?php
-namespace App\Models;
-use Illuminate\Database\Eloquent\Model;
-
-class Product extends Model
-{
-    protected $fillable = ['nom', 'prix', 'image', 'desc', 'categorie'];
-}
-```
+**Fichier de configuration :** `products-pictures.json`
 
 ```json
 {
-    "version": 2,
-    "outputDirectory": "public",
-    "functions": { "api/index.php": { "runtime": "vercel-php@0.7.1" } },
-    "routes": [
-        { "src": "/build/(.*)", "dest": "/build/$1" },
-        { "src": "/assets/(.*)", "dest": "/assets/$1" },
-        { "src": "/favicon.png", "dest": "/favicon.png" },
-        { "src": "/(.*)", "dest": "/api/index.php" }
+    "consoles": [
+        { "name": "PS5 Pro", "img": "https://..." },
+        ...
     ]
 }
 ```
+
+**Commande de mise à jour :**
+
+```bash
+php artisan db:seed --class=ProductSeeder
+```
+
+### 2️⃣ Contrôleurs (`app/Http/Controllers`)
+
+**ProductController :** Gère l'affichage paginé.
+
+```php
+public function getProductsByCategorie($cat)
+{
+    $products = Product::where('categorie', $cat)->paginate(6); // 6 par page
+    return view('Produits', ['titre' => ucfirst($cat), 'liste' => $products]);
+}
+```
+
+**HomeController :** Gère les pages statiques et l'index des catégories.
+
+```php
+public function categories()
+{
+    // Affiche la grille des 8 catégories
+    return view('Categories');
+}
+```
+
+### 3️⃣ Vues Clés (`resources/views`)
+
+- **`Categories.blade.php`** : Nouvelle vue grille pour l'accès visuel aux collections.
+- **`Menu.blade.php`** : Navigation responsive avec menu déroulant intelligent.
+- **`Produits.blade.php`** : Inclut désormais les liens de pagination Laravel stylisés.
 
 ---
 
