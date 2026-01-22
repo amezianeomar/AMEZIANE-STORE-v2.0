@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Route Produits (DYNAMIQUE via Base de Données)
+Route::get('/produits/create', [ProductController::class, 'create'])->name('produits.create');
+Route::post('/produits', [ProductController::class, 'store'])->name('produits.store');
 Route::get('/produits/{cat}', [ProductController::class, 'getProductsByCategorie'])->name('produits.categorie');
 
 // Routes Statiques
