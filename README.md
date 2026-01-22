@@ -1,11 +1,11 @@
-# 🚀 AMEZIANE-STORE V3.1 (MVC + Pagination + Data) - Ateliers 6, 7, 8
+# 🚀 AMEZIANE-STORE V3.1 (MVC + Pagination + Data) - Ateliers 6 & 7
 
 Ce fichier `README.md` documente la version complète **V3.1** du projet E-commerce.
 Cette version intègre une architecture MVC, une pagination robuste, un catalogue étendu avec données réelles, et une navigation dynamique.
 
 ---
 
-## 📋 Nouveautés (Ateliers 6, 7, 8)
+## 📋 Nouveautés (Ateliers 6 & 7)
 
 ### Atelier 6 : Architecture MVC
 
@@ -18,7 +18,7 @@ Cette version intègre une architecture MVC, une pagination robuste, un catalogu
 - **Pagination** : Implémentation de `paginate(6)` pour une navigation fluide.
 - **Menu Dynamique** : Dropdown "Catégories" compatible Desktop/Mobile (Alpine.js).
 
-### Atelier 8 : Données Réelles et Landing Page
+### Atelier 7.1 : Données Réelles et Landing Page
 
 - **Pages Catégories** : Vue dédiée `/categories` présentant les 8 familles de produits.
 - **Données Externes** : Utilisation de `products-pictures.json` pour la gestion facile des images.
