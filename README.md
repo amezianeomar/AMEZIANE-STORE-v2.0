@@ -1,4 +1,4 @@
-# 🚀 AMEZIANE-STORE V4.0 (God Mode Ultimate) - Ateliers 5 à 10
+# 🚀 AMEZIANE-STORE V4.0 (God Mode Ultimate) - Ateliers 5 à 9
 
 Bienvenue sur la documentation officielle du projet **AMEZIANE-STORE**.
 Cette plateforme E-commerce a évolué d'un simple site statique vers une application Laravel MVC puissante, hébergée dans le cloud et pilotée par un système d'administration "God Mode" complet.
@@ -48,7 +48,7 @@ Cette plateforme E-commerce a évolué d'un simple site statique vers une applic
   - **Actions** : Édition "In-Place" et Suppression sécurisée (Modale "Zone Dangereuse").
 - **UX Admin** : Feedback visuel "Godly" lors des succès (Modales de confirmation).
 
-### 👁️ Atelier 10 (Bonus) : Product Details & Responsiveness
+### 👁️ Atelier 9.1 (Bonus) : Product Details & Responsiveness
 
 *L'expérience utilisateur ultime.*
 
