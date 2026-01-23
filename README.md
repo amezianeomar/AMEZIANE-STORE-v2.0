@@ -1,7 +1,7 @@
-# 🚀 AMEZIANE-STORE V3.2 (God Mode Edition) - Ateliers 5 à 8
+# 🚀 AMEZIANE-STORE V4.0 (God Mode Ultimate) - Ateliers 5 à 10
 
 Bienvenue sur la documentation officielle du projet **AMEZIANE-STORE**.
-Cette plateforme E-commerce a évolué d'un simple site statique vers une application Laravel MVC puissante, hébergée dans le cloud et pilotée par une interface d'administration "God Mode".
+Cette plateforme E-commerce a évolué d'un simple site statique vers une application Laravel MVC puissante, hébergée dans le cloud et pilotée par un système d'administration "God Mode" complet.
 
 ---
 
@@ -11,47 +11,62 @@ Cette plateforme E-commerce a évolué d'un simple site statique vers une applic
 
 *Mise en place de la structure Laravel de base.*
 
-- **Templating Blade** : Création du `Master_page.blade.php` pour un design unifié.
-- **Vues Statiques** : Pages Accueil, Produits, Contact.
-- **Routing** : Gestion des premières routes dans `web.php` avec fonctions anonymes.
-- **Design** : Intégration initiale du thème "Dark Gaming" (Tailwind CSS).
+- **Templating Blade** : Création du `Master_page.blade.php`.
+- **Design** : Intégration du thème "Dark Gaming".
 
-### 🔵 Atelier 6 : Architecture MVC (Refactoring)
+### 🔵 Atelier 6 : Architecture MVC
 
 *Passage à une architecture professionnelle.*
 
-- **Controllers** : Séparation logique via `ProductController` (logique métier) et `HomeController` (pages statiques).
-- **Refactoring** : Nettoyage de `web.php` pour déléguer le traitement aux contrôleurs.
-- **Modèle** : Utilisation du modèle `Product` pour interagir avec la base de données.
+- **Controllers** : Logique métier séparée (`ProductController`).
+- **Modèle** : Interaction BDD via Eloquent ORM.
 
-### 🟣 Atelier 7 : Data & Navigation (Experience Utilisateur)
+### 🟣 Atelier 7 : Data & Pagination
 
-*Enrichissement du catalogue et de la navigation.*
+*Enrichissement du catalogue.*
 
-- **Masse de Données** : Expansion à **72 produits** (8 catégories) via Seeders + JSON.
-- **Pagination** : Implémentation fluide `paginate(6)` pour naviguer dans le catalogue.
-- **Menu Dynamique** : Dropdown "Catégories" responsive et menu mobile optimisé.
-- **Données Réelles** : Intégration de `products-pictures.json` pour un réalisme total des produits.
+- **Masse de Données** : 72 produits seedés.
+- **Pagination** : Navigation fluide par pages de 6 items.
 
-### 🔴 Atelier 8 : Administration & Cloudinary (GOD MODE)
+### 🔴 Atelier 8 : Upload Cloudinary
 
-*Le pouvoir total entre vos mains.*
+*Gestion des médias dans le cloud.*
 
-- **Upload Cloudinary** : Stockage des images 100% Serverless/Cloud via SDK.
-- **God Portal** : Accès direct à la création de produit depuis le menu principal.
-- **Preview Temps Réel** : Prévisualisation JS instantanée ("What you see is what you get").
-- **Legendary Loot Modal** : Feedback utilisateur "Gamifié" avec animation de succès rare.
-- **Sécurité SSL** : Configuration robuste pour le développement local et la production.
+- **Serverless** : Upload d'images directement sur Cloudinary.
+- **Preview** : Aperçu instantané avant upload.
+
+### 🔱 Atelier 9 : God Portal & CRUD (Admin System)
+
+*Le pouvoir total séparé du monde des mortels.*
+
+- **Architecture Duale** : Séparation stricte entre :
+  - **Storefront (Client)** : Catalogue propre, sans boutons d'administration.
+  - **God Portal (Admin)** : Dashboard dédié (`/admin`) pour la gestion.
+- **CRUD Complet** :
+  - **Tableau de Bord** : Vue d'ensemble et navigation rapide.
+  - **Inventaire** : Table de données avec Recherche, Filtres et Pagination.
+  - **Actions** : Édition "In-Place" et Suppression sécurisée (Modale "Zone Dangereuse").
+- **UX Admin** : Feedback visuel "Godly" lors des succès (Modales de confirmation).
+
+### 👁️ Atelier 10 (Bonus) : Product Details & Responsiveness
+
+*L'expérience utilisateur ultime.*
+
+- **Page Détails** : Vue immersive (`/produits/{id}`) avec Zoom, Specs, et Navigation fil d'Ariane.
+- **Mobile First** :
+  - Le tableau d'admin se transforme en **Cartes** sur mobile.
+  - Layout des boutons optimisé (80% Panier / 20% Wishlist).
+- **Validation Intelligente** : Mise à jour sans ré-upload d'image obligatoire.
 
 ---
 
-## 🛠 Stack Technique V3.2
+## 🛠 Stack Technique V4.0
 
-- **Backend** : Laravel 11/12 (PHP 8.2+).
-- **Frontend** : Tailwind CSS + Alpine.js (Thème Dark Gaming).
-- **Database** : MySQL (Production: AlwaysData / Local: Laragon).
-- **Storage** : Cloudinary (Images).
-- **Hébergement** : Vercel (Serverless).
+- **Backend** : Laravel 10/11 (PHP 8.2+).
+- **Frontend** : Tailwind CSS + Alpine.js (Thème Neon/Dark).
+- **Database** : MySQL (Laragon/AlwaysData).
+- **Media** : Cloudinary (Optimized Delivery).
+- **Architecture** : MVC + Resource Controllers + Custom Requests.
 
 ---
 
@@ -59,23 +74,21 @@ Cette plateforme E-commerce a évolué d'un simple site statique vers une applic
 
 ### 1️⃣ Routes & Controllers
 
-Toute la logique est centralisée et propre.
-
-- `routes/web.php` : Définit les accès (God Portal, Catalogue, etc.).
-- `ProductController.php` : Gère l'upload Cloudinary et la pagination.
+- `routes/web.php` : Définit les accès publics et les routes admin (`admin.*`).
+- `ProductController.php` : Gère le CRUD, l'upload, et les deux interfaces (Public/Admin).
 
 ### 2️⃣ Vues (Blade)
 
-- `Master_page.blade.php` : Le squelette global.
-- `Menu.blade.php` : La navigation intelligente.
-- `Produits/create.blade.php` : Le formulaire "God Mode" avec prévisualisation.
+- `Admin/dashboard.blade.php` : La porte d'entrée du God Mode.
+- `Admin/index.blade.php` : La tour de contrôle (Inventaire).
+- `Produits/show.blade.php` : La vitrine détaillée du produit.
+- `Produits/edit.blade.php` : Le formulaire de modification "Godly".
 
 ---
 
 ## 🌍 Déploiement
 
-Le projet est conçu pour être déployé en quelques clics sur **Vercel** avec une base de données MySQL externe (AlwaysData).
-Les clés d'API Cloudinary assurent que le stockage des images fonctionne partout, sans configuration serveur complexe.
+Le projet est Cloud-Ready. Les assets sont gérés par CDN (Cloudinary), la BDD est externe, et le code est optimisé pour les environnements Serverless (Vercel/Heroku).
 
 ---
 *Architected by AMEZIANE-STORE Team & The Gods.*

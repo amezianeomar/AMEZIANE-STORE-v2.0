@@ -21,12 +21,19 @@ class AddProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'nom' => 'required|min:5',
             'prix' => 'required|numeric',
             'categorie' => 'required',
             'image' => 'required|image|max:2048'
         ];
+
+        // Si c'est une mise à jour (PUT/PATCH), l'image n'est pas obligatoire
+        if ($this->isMethod('put') || $this->isMethod('patch')) {
+            $rules['image'] = 'nullable|image|max:2048';
+        }
+
+        return $rules;
     }
 
     public function messages()

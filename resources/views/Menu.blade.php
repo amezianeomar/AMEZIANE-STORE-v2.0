@@ -47,7 +47,7 @@
                 </a>
                 
                 <!-- GOD PORTAL -->
-                <a href="{{ route('produits.create') }}" class="font-display text-sm font-bold text-brand-magenta hover:text-brand-neon transition-colors uppercase tracking-widest border-2 border-brand-magenta hover:border-brand-neon rounded px-3 py-1 ml-4 animate-pulse">
+                <a href="{{ route('admin.dashboard') }}" class="font-display text-sm font-bold text-brand-magenta hover:text-brand-neon transition-colors uppercase tracking-widest border-2 border-brand-magenta hover:border-brand-neon rounded px-3 py-1 ml-4 animate-pulse">
                     GOD PORTAL
                 </a>
             </div>
@@ -96,7 +96,7 @@
          <a href="{{ route('contact') }}" class="block text-center font-display text-2xl font-bold py-4 border-b border-white/10 hover:text-brand-neon {{ request()->routeIs('contact') ? 'text-brand-neon' : 'text-white' }}">Contact</a>
          
          <!-- Mobile God Portal -->
-         <a href="{{ route('produits.create') }}" class="block text-center font-display text-2xl font-bold py-4 border-b border-white/10 text-brand-magenta hover:text-brand-neon animate-pulse">GOD PORTAL</a>
+         <a href="{{ route('admin.dashboard') }}" class="block text-center font-display text-2xl font-bold py-4 border-b border-white/10 text-brand-magenta hover:text-brand-neon animate-pulse">GOD PORTAL</a>
 
          <!-- Mobile Footer Info -->
         <div class="mt-auto pb-10 text-center">
