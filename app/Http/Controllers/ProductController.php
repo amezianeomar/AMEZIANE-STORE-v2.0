@@ -50,9 +50,6 @@ class ProductController extends Controller
             ],
             'url' => [
                 'secure' => true
-            ],
-            'api_client_options' => [
-                'verify' => false
             ]
         ]);
 
